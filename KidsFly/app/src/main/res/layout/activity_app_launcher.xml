@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/background_light"
+    tools:context="AppLauncherActivity">
+
+
+    <ImageView android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:id="@+id/app_Icon"
+        android:src="@drawable/logo_kidsfly"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/userName"
+        app:layout_constraintTop_toTopOf="parent"/>
+    <EditText
+        android:id="@+id/userName"
+        android:layout_width="0dp"
+        android:layout_marginHorizontal="48dp"
+        android:layout_height="wrap_content"
+        android:hint="User Name"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toTopOf="@id/password"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/app_Icon"/>
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="0dp"
+        android:layout_marginHorizontal="48dp"
+        android:layout_marginVertical="10dp"
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toTopOf="@id/signIn"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/userName" />
+
+    <Button
+        android:id="@+id/signIn"
+        android:layout_width="0dp"
+        android:layout_marginHorizontal="48dp"
+        android:layout_marginBottom="8dp"
+        android:layout_height="wrap_content"
+        android:text="Sign In"
+        android:textSize="18dp"
+        android:textColor="@android:color/black"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintBottom_toTopOf="@id/register"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/password"/>
+    <Button
+        android:id="@+id/register"
+        android:layout_width="0dp"
+        android:layout_marginHorizontal="48dp"
+        android:layout_marginBottom="8dp"
+        android:layout_height="wrap_content"
+        android:text="Register"
+        android:textSize="18dp"
+        android:textColor="@android:color/white"
+        android:background="@android:color/holo_green_dark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/signIn"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
