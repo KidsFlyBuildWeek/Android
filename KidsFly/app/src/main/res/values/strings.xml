@@ -3,4 +3,14 @@
     <string name="dummy_toolbar_text">Name last name</string>
     <string name="home">Home</string>
     <string name="exit">Exit</string>
+    <string name="past_trips">Past Trips</string>
+    <string name="account_settings">Account Settings</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="kids_fly">KidsFly</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="past_trips_dummy">Past Trips</string>
+    <string name="account_settings_dummy">Account Settings</string>
+    <string name="sign_out_dummy">Sign Out</string>
 </resources>

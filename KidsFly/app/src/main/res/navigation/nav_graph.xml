@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/destination_past_trips">
+
+    <fragment
+        android:id="@+id/destination_past_trips"
+        android:name="com.ali.kidsfly.fragment.PastTrips"
+        android:label="fragment_past_trips"
+        tools:layout="@layout/fragment_past_trips" >
+        <action
+            android:id="@+id/back_to_home"
+            app:destination="@id/destination_home" />
+    </fragment>
+    <fragment
+        android:id="@+id/destination_account_settings"
+        android:name="com.ali.kidsfly.fragment.AccountSettingsFragment"
+        android:label="fragment_account_settings"
+        tools:layout="@layout/fragment_account_settings" >
+        <action
+            android:id="@+id/back_to_home"
+            app:destination="@id/destination_home" />
+    </fragment>
+    <activity
+        android:id="@+id/destination_home"
+        android:name="com.ali.kidsfly.ui.HomepageActivity"
+        android:label="HomepageActivity" />
+    <fragment
+        android:id="@+id/destination_sign_out"
+        android:name="com.ali.kidsfly.fragment.SignOut"
+        android:label="fragment_sign_out" >
+        <action
+            android:id="@+id/next_action"
+            app:destination="@+id/appLauncherActivity" />
+    </fragment>
+    <activity
+        android:id="@+id/appLauncherActivity"
+        android:name="com.ali.kidsfly.AppLauncherActivity"
+        android:label="activity_app_launcher"
+        tools:layout="@layout/activity_app_launcher" />
+    <activity
+        android:id="@+id/registerActivity"
+        android:name="com.ali.kidsfly.ui.RegisterActivity"
+        android:label="activity_register"
+        tools:layout="@layout/activity_register" />
+</navigation>
