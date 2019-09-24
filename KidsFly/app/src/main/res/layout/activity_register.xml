@@ -11,12 +11,11 @@
         android:id="@+id/iv_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/logo_kidsfly"
         android:layout_marginTop="20dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
+        <!--android:src="@drawable/logo_kidsfly"-->
 
     <TextView
         android:id="@+id/tv_email"

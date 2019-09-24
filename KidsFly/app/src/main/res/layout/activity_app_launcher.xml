@@ -8,16 +8,16 @@
     android:background="@android:color/background_light"
     tools:context="AppLauncherActivity">
 
-
     <ImageView android:layout_width="wrap_content"
         android:layout_height="200dp"
         android:id="@+id/app_Icon"
-        android:src="@drawable/logo_kidsfly"
         app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toTopOf="@id/userName"
         app:layout_constraintTop_toTopOf="parent"/>
+    <!--android:src="@drawable/logo_kidsfly"-->
+
     <EditText
         android:id="@+id/userName"
         android:layout_width="0dp"
