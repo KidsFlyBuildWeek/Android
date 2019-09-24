@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/destination_past_trips">
+    app:startDestination="@id/destination_current_trips">
 
     <fragment
         android:id="@+id/destination_past_trips"
@@ -16,7 +16,6 @@
     <fragment
         android:id="@+id/destination_account_settings"
         android:name="com.ali.kidsfly.fragment.AccountSettingsFragment"
-        android:label="Account Settings"
         tools:layout="@layout/fragment_account_settings">
         <action
             android:id="@+id/back_to_home"
@@ -28,8 +27,7 @@
         android:label="Home" />
     <fragment
         android:id="@+id/destination_sign_out"
-        android:name="com.ali.kidsfly.fragment.SignOut"
-        android:label="Sign Out">
+        android:name="com.ali.kidsfly.fragment.SignOut">
         <action
             android:id="@+id/next_action"
             app:destination="@+id/appLauncherActivity" />
@@ -44,4 +42,8 @@
         android:name="com.ali.kidsfly.ui.RegisterActivity"
         android:label="activity_register"
         tools:layout="@layout/activity_register" />
+    <fragment
+        android:id="@+id/destination_current_trips"
+        android:name="com.ali.kidsfly.fragment.CurrentTrips"
+        tools:layout="@layout/fragment_current_trips" />
 </navigation>

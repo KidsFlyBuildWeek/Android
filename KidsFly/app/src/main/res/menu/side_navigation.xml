@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/destination_current_trips"
+        android:title="Current Trips" />
+    <item
         android:id="@+id/destination_past_trips"
-        android:title="@string/past_trips" />
+        android:title="@string/past_trips_dummy" />
     <item
         android:id="@+id/destination_account_settings"
         android:title="@string/account_settings" />
