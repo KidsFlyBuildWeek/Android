@@ -27,20 +27,18 @@
                 android:id="@+id/toolbar_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/kids_fly"
-                android:gravity="center_horizontal"
-                android:textSize="20sp"/>
+                android:gravity="center_horizontal"/>
 
         </com.google.android.material.appbar.MaterialToolbar>
 
         <fragment
             android:id="@+id/nav_host_fragment"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
             android:layout_weight="1"
             android:name="androidx.navigation.fragment.NavHostFragment"
             app:navGraph="@navigation/nav_graph"
-            app:defaultNavHost="true" />
+            app:defaultNavHost="true"/>
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_nav"
