@@ -35,6 +35,7 @@
         app:layout_constraintVertical_bias="0.051" />
 
     <include layout="@layout/floating_action_bar"
+        android:id="@+id/floating_action_layout"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
