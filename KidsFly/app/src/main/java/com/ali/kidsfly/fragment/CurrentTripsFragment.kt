@@ -1,21 +1,16 @@
 package com.ali.kidsfly.fragment
 
 
-import android.app.Activity
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.coordinatorlayout.widget.CoordinatorLayout
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.get
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-
 import com.ali.kidsfly.R
 import com.ali.kidsfly.SwipeRightToDelete
 import com.ali.kidsfly.TripListAdapter
@@ -28,21 +23,22 @@ class CurrentTrips : Fragment() {
 
     private lateinit var tripListAdapter: TripListAdapter
     private lateinit var tripViewModel: TripViewModel
+    private lateinit var swipeRightToDelete: SwipeRightToDelete
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_current_trips, container, false)
 
         tripViewModel = ViewModelProvider(requireActivity()).get(TripViewModel::class.java) //gets the view model from the attached activity
+        tripListAdapter = TripListAdapter(mutableListOf())
+        swipeRightToDelete = SwipeRightToDelete(tripListAdapter)
 
         setupRecyclerView()
+        ItemTouchHelper(swipeRightToDelete).attachToRecyclerView(recycler_view)
 
         val fab = (floating_action_layout as CoordinatorLayout).fab as FloatingActionButton
-
-        tripListAdapter = TripListAdapter(mutableListOf())
-
         fab.setOnClickListener {
-            //create the trip, add it to recyclerview
+            //create the trip by opening up a pop-up fragment, and if trip is created, add it to recyclerview
         }
 
         return view
@@ -53,7 +49,6 @@ class CurrentTrips : Fragment() {
         recycler_view.apply{
             layoutManager = LinearLayoutManager(activity as Context, LinearLayoutManager.VERTICAL, false)
             adapter = tripListAdapter
-            //addOnItemTouchListener(SwipeRightToDelete(tripListAdapter))
         }
     }
 }

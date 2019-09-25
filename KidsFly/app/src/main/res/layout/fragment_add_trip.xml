@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="280dp"
+    android:layout_height="430dp"
+    tools:context=".fragment.AddTripFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/relative_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <SearchView
+                android:id="@+id/search_airport"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:queryHint="@string/search_airports" />
+
+            <EditText
+                android:id="@+id/edit_date"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="date"
+                android:layout_below="@id/search_airport"/>
+
+            <!--add a calendar view here programatically -->
+<!--            <CalendarView-->
+<!--                android:layout_width="300dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@id/edit_date"-->
+<!--                android:layout_marginTop="1dp"></CalendarView>-->
+
+            <TextView
+                android:id="@+id/text_num_passengers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/number_of_passengers"
+                android:layout_below="@id/edit_date"
+                android:paddingRight="10dp"/>
+
+            <EditText
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_toEndOf="@id/text_num_passengers"
+                android:layout_below="@id/edit_date" />
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</FrameLayout>

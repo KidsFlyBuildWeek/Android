@@ -13,4 +13,9 @@
     <string name="current_trips_dummy">Current Trips</string>
     <string name="default_name">Default name</string>
     <string name="plus">+</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search_airports">Search for airports</string>
+    <string name="number_of_passengers">Number of passengers:</string>
 </resources>
