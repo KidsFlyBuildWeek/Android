@@ -4,7 +4,4 @@
         android:id="@+id/destination_home"
         android:icon="@drawable/home_icon"
         android:title="@string/home" />
-    <item
-        android:id="@+id/exit"
-        android:title="@string/exit"/>
 </menu>

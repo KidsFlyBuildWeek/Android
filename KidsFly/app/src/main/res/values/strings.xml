@@ -10,4 +10,6 @@
     <string name="account_settings_dummy">Account Settings</string>
     <string name="sign_out_dummy">Sign Out</string>
     <string name="current_trips">Current Trips</string>
+    <string name="current_trips_dummy">Current Trips</string>
+    <string name="default_name">Default name</string>
 </resources>

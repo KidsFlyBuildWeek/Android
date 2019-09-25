@@ -27,4 +27,5 @@
     <style name="MenuTheme">
         <item name="android:actionMenuTextColor">@color/design_default_color_error</item>
     </style>
+
 </resources>
