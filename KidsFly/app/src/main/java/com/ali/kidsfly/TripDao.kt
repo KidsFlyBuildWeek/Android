@@ -2,6 +2,7 @@ package com.ali.kidsfly
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.ali.kidsfly.model.Trip
 
 @Dao
 interface TripDao {

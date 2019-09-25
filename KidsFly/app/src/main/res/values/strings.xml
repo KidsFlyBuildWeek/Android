@@ -12,4 +12,5 @@
     <string name="current_trips">Current Trips</string>
     <string name="current_trips_dummy">Current Trips</string>
     <string name="default_name">Default name</string>
+    <string name="plus">+</string>
 </resources>

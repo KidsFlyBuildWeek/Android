@@ -5,10 +5,12 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import com.ali.kidsfly.R
+import com.ali.kidsfly.TripViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_homepage.*
@@ -16,6 +18,7 @@ import kotlinx.android.synthetic.main.activity_homepage.*
 class HomepageActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
+    private lateinit var tripViewModel: TripViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,9 +26,10 @@ class HomepageActivity : AppCompatActivity() {
         setContentView(R.layout.activity_homepage)
         setSupportActionBar(findViewById(R.id.top_toolbar))
 
-
+        tripViewModel = ViewModelProvider(this).get(TripViewModel::class.java)
 
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)
+
         setupBottomNavigation()
         setupSideNavigation()
         setupActionBar()

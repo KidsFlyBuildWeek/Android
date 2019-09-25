@@ -34,7 +34,7 @@
     </fragment>
     <activity
         android:id="@+id/appLauncherActivity"
-        android:name="com.ali.kidsfly.AppLauncherActivity"
+        android:name="com.ali.kidsfly.ui.AppLauncherActivity"
         android:label="activity_app_launcher"
         tools:layout="@layout/activity_app_launcher" />
     <activity

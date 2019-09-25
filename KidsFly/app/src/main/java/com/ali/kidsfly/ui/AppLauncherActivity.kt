@@ -1,9 +1,9 @@
-package com.ali.kidsfly
+package com.ali.kidsfly.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.ali.kidsfly.ui.RegisterActivity
+import com.ali.kidsfly.R
 import kotlinx.android.synthetic.main.activity_app_launcher.*
 
 class AppLauncherActivity : AppCompatActivity() {

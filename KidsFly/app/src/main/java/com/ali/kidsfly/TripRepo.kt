@@ -3,6 +3,7 @@ package com.ali.kidsfly
 import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.room.Room
+import com.ali.kidsfly.model.Trip
 
 class TripRepo(context: Context): TripDao {
 

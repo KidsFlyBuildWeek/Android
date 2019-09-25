@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.ali.kidsfly.model.Trip
 
 class TripListAdapter(val data: MutableList<Trip>): RecyclerView.Adapter<TripListAdapter.ViewHolder>() {
 
