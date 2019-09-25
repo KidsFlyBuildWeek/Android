@@ -32,12 +32,6 @@
 
             <!--add a calendar view here programatically -->
 
-<!--            <CalendarView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_below="@id/edit_date"-->
-<!--                android:layout_marginTop="1dp"></CalendarView>-->
-
             <TextView
                 android:id="@+id/text_num_passengers"
                 android:layout_width="wrap_content"
