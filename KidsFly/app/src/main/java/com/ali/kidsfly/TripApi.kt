@@ -1,10 +1,10 @@
 package com.ali.kidsfly
 
+import com.ali.kidsfly.model.DownloadedUserProfile
 import com.ali.kidsfly.model.UserProfile
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -20,7 +20,7 @@ interface TripApi {
     fun postUserProfile(@Body user: UserProfile) : Call<UserProfile>
 
     @GET("parents/{parentid}")
-    fun getUserProfileInformation(@Query("parentid")parentid: String): Call<UserProfile>
+    fun getUserProfileInformation(@Query("parentid") parentid: Int): Call<DownloadedUserProfile>
 
     companion object{
 

@@ -32,7 +32,7 @@ class RegisterActivity : AppCompatActivity(), Callback<UserProfile> {
             if(fullname != "" && address != "" && password != "" && phonenumber != "" && email != "" &&
                 password == et_confirm_password.text.toString() && username != ""){
                 val user = UserProfile(username, password, phonenumber, email, fullname, address)
-                TripApi.getTripApiCall().postUserProfile(user).enqueue(this)
+                PostUserProfileAsyncTask(this).execute(user)
             } else{
                 Toast.makeText(this, "Registration failed", Toast.LENGTH_SHORT).show()
             }
@@ -57,7 +57,6 @@ class RegisterActivity : AppCompatActivity(), Callback<UserProfile> {
         override fun doInBackground(vararg p0: UserProfile?): Call<UserProfile> {
             return TripApi.getTripApiCall().postUserProfile(p0[0]!!)
         }
-
         override fun onPostExecute(result: Call<UserProfile>?) {
             result?.let{ res->
                 act.get()?.let{
