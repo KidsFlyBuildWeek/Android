@@ -1,10 +1,12 @@
 package com.ali.kidsfly.ui
 
+import android.content.Context
 import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat.startActivity
 import com.ali.kidsfly.R
 import com.ali.kidsfly.TripApi
 import com.ali.kidsfly.model.UserProfile
@@ -15,7 +17,7 @@ import retrofit2.Response
 import java.lang.ref.WeakReference
 
 
-class RegisterActivity : AppCompatActivity(), Callback<UserProfile> {
+class RegisterActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,18 +41,6 @@ class RegisterActivity : AppCompatActivity(), Callback<UserProfile> {
         }
     }
 
-    override fun onFailure(call: Call<UserProfile>, t: Throwable) {
-        Toast.makeText(this, "User profile upload failed", Toast.LENGTH_SHORT).show()
-    }
-
-    override fun onResponse(call: Call<UserProfile>, response: Response<UserProfile>) {
-        response.body()?.let{
-            val intent = Intent(this, HomepageActivity::class.java)
-            intent.putExtra("User", it)
-            startActivity(intent)
-        }
-    }
-
     class PostUserProfileAsyncTask(activity: RegisterActivity) : AsyncTask<UserProfile, Void, Call<UserProfile>>() {
         private val act = WeakReference(activity)
 
@@ -60,7 +50,21 @@ class RegisterActivity : AppCompatActivity(), Callback<UserProfile> {
         override fun onPostExecute(result: Call<UserProfile>?) {
             result?.let{ res->
                 act.get()?.let{
-                    res.enqueue(it)
+                    res.enqueue(object: Callback<UserProfile>{
+                        override fun onFailure(call: Call<UserProfile>, t: Throwable) {
+                            Toast.makeText(it, "User profile upload failed", Toast.LENGTH_SHORT).show()
+                        }
+
+                        override fun onResponse(call: Call<UserProfile>, response: Response<UserProfile>) {
+                            response.body()?.let{
+                                act.get()?.let{activity->
+                                    val intent = Intent(activity as Context, HomepageActivity::class.java)
+                                    intent.putExtra("User", it)
+                                    activity.startActivity(intent)
+                                }
+                            }
+                        }
+                    })
                 }
             }
         }

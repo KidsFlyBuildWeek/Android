@@ -51,7 +51,7 @@ class AppLauncherActivity : AppCompatActivity(){
                     override fun onResponse(call: Call<DownloadedUserProfile>, response: Response<DownloadedUserProfile>) {
                         act.get()?.let{ x->
                             response.body()?.let{
-                                val intent= Intent(x as Context, RegisterActivity::class.java)
+                                val intent= Intent(x as Context, HomepageActivity::class.java)
                                 intent.putExtra("User", it)
                                 x.startActivity(intent)
                             }
