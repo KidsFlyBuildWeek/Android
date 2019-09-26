@@ -21,7 +21,10 @@ class HomepageActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
     lateinit var tripViewModel: TripViewModel
-    lateinit var user: UserProfile
+
+    companion object {
+        lateinit var user: UserProfile
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

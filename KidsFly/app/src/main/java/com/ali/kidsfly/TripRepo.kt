@@ -11,7 +11,7 @@ class TripRepo(context: Context): TripDao {
 
     override fun createTripEntry(trip: Trip) {
         if(trip.isCurrentTrip){
-            currentTripsDatabase.tripDao().createTripEntry(trip)
+            currentTripsDatabase.tripDao().createTripEntry(trip) //what i really have to do is update the
         } else{
             savedTripsDatabase.tripDao().createTripEntry(trip)
         }
