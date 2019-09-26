@@ -7,119 +7,144 @@
     android:layout_height="match_parent"
     tools:context=".ui.RegisterActivity">
 
-    <ImageView
-        android:id="@+id/iv_logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-        <!--android:src="@drawable/logo_kidsfly"-->
-
-    <TextView
-        android:id="@+id/tv_email"
-        android:text="Email"
-        style="@style/tvRegister"
-        app:layout_constraintTop_toBottomOf="@id/iv_logo"
-        app:layout_constraintLeft_toLeftOf="parent"/>
-
-    <EditText
-        android:id="@+id/et_email"
-        style="@style/etRegister"
-        app:layout_constraintTop_toBottomOf="@id/tv_email"
-        app:layout_constraintLeft_toLeftOf="parent"/>
-
-    <TextView
-        android:id="@+id/tv_first_name"
-        android:text="@string/full_name"
-        style="@style/tvRegister"
-        app:layout_constraintTop_toBottomOf="@id/et_email"
-        app:layout_constraintLeft_toLeftOf="parent"/>
-
-    <EditText
-        android:id="@+id/et_full_name"
-        style="@style/etRegister"
-        app:layout_constraintTop_toBottomOf="@id/tv_first_name"
-        app:layout_constraintLeft_toLeftOf="parent"/>
-
-    <TextView
-        android:id="@+id/tv_phone_number"
-        android:text="@string/phone_number"
-        style="@style/tvRegister"
-        app:layout_constraintTop_toBottomOf="@id/et_full_name"
-        app:layout_constraintLeft_toLeftOf="parent"/>
-
-    <EditText
-        android:id="@+id/et_phone_number"
-        style="@style/etRegister"
-        app:layout_constraintTop_toBottomOf="@id/tv_phone_number"
-        app:layout_constraintLeft_toLeftOf="parent"/>
-
-    <TextView
-        android:id="@+id/tv_address"
-        android:text="@string/address"
-        style="@style/tvRegister"
-        app:layout_constraintTop_toBottomOf="@id/et_phone_number"
-        app:layout_constraintLeft_toLeftOf="parent"/>
-
-    <EditText
-        android:id="@+id/et_address"
-        style="@style/etRegister"
-        app:layout_constraintTop_toBottomOf="@id/tv_address"
-        app:layout_constraintLeft_toLeftOf="parent"/>
-
-    <TextView
-        android:id="@+id/tv_username"
-        style="@style/tvRegister"
-        android:text="@string/username"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_address"/>
-
-    <EditText
-        android:id="@+id/et_username"
-        style="@style/etRegister"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_username"/>
-
-    <TextView
-        android:id="@+id/tv_password"
-        android:text="Password"
-        style="@style/tvRegister"
-        app:layout_constraintTop_toBottomOf="@id/et_username"
-        app:layout_constraintLeft_toLeftOf="parent"/>
-
-    <EditText
-        android:id="@+id/et_password"
-        style="@style/etRegister"
-        android:inputType="textPassword"
-        app:layout_constraintTop_toBottomOf="@id/tv_password"
-        app:layout_constraintLeft_toLeftOf="parent"/>
-
-    <TextView
-        android:id="@+id/tv_confirm_password"
-        android:text="Confirm Password"
-        style="@style/tvRegister"
-        app:layout_constraintTop_toBottomOf="@id/et_password"
-        app:layout_constraintLeft_toLeftOf="parent"/>
-
-    <EditText
-        android:id="@+id/et_confirm_password"
-        style="@style/etRegister"
-        android:inputType="textPassword"
-        app:layout_constraintTop_toBottomOf="@id/tv_confirm_password"
-        app:layout_constraintLeft_toLeftOf="parent"/>
-
-    <Button
-        android:id="@+id/btn_submit"
-        android:text="Submit"
-        android:background="@android:color/holo_green_dark"
-        android:textColor="@android:color/white"
-        android:layout_width="wrap_content"
+    <ScrollView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_confirm_password"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iv_logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_email"
+                android:text="Email"
+                style="@style/tvRegister"
+                app:layout_constraintTop_toBottomOf="@id/iv_logo"
+                app:layout_constraintLeft_toLeftOf="parent"/>
+
+            <EditText
+                android:id="@+id/et_email"
+                style="@style/etRegister"
+                app:layout_constraintTop_toBottomOf="@id/tv_email"
+                app:layout_constraintLeft_toLeftOf="parent"/>
+
+            <TextView
+                android:id="@+id/tv_first_name"
+                android:text="@string/full_name"
+                style="@style/tvRegister"
+                app:layout_constraintTop_toBottomOf="@id/et_email"
+                app:layout_constraintLeft_toLeftOf="parent"/>
+
+            <EditText
+                android:id="@+id/et_full_name"
+                style="@style/etRegister"
+                app:layout_constraintTop_toBottomOf="@id/tv_first_name"
+                app:layout_constraintLeft_toLeftOf="parent"/>
+
+            <TextView
+                android:id="@+id/tv_phone_number"
+                android:text="@string/phone_number"
+                style="@style/tvRegister"
+                app:layout_constraintTop_toBottomOf="@id/et_full_name"
+                app:layout_constraintLeft_toLeftOf="parent"/>
+
+            <EditText
+                android:id="@+id/et_phone_number"
+                style="@style/etRegister"
+                app:layout_constraintTop_toBottomOf="@id/tv_phone_number"
+                app:layout_constraintLeft_toLeftOf="parent"/>
+
+            <TextView
+                android:id="@+id/tv_address"
+                android:text="@string/address"
+                style="@style/tvRegister"
+                app:layout_constraintTop_toBottomOf="@id/et_phone_number"
+                app:layout_constraintLeft_toLeftOf="parent"/>
+
+            <EditText
+                android:id="@+id/et_address"
+                style="@style/etRegister"
+                app:layout_constraintTop_toBottomOf="@id/tv_address"
+                app:layout_constraintLeft_toLeftOf="parent"/>
+
+            <TextView
+                android:id="@+id/tv_username"
+                style="@style/tvRegister"
+                android:text="@string/username"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_address"/>
+
+            <EditText
+                android:id="@+id/et_username"
+                style="@style/etRegister"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_username"/>
+
+            <TextView
+                android:id="@+id/tv_password"
+                android:text="Password"
+                style="@style/tvRegister"
+                app:layout_constraintTop_toBottomOf="@id/et_username"
+                app:layout_constraintLeft_toLeftOf="parent"/>
+
+            <EditText
+                android:id="@+id/et_password"
+                style="@style/etRegister"
+                android:inputType="textPassword"
+                app:layout_constraintTop_toBottomOf="@id/tv_password"
+                app:layout_constraintLeft_toLeftOf="parent"/>
+
+            <TextView
+                android:id="@+id/tv_confirm_password"
+                android:text="Confirm Password"
+                style="@style/tvRegister"
+                app:layout_constraintTop_toBottomOf="@id/et_password"
+                app:layout_constraintLeft_toLeftOf="parent"/>
+
+            <EditText
+                android:id="@+id/et_confirm_password"
+                style="@style/etRegister"
+                android:inputType="textPassword"
+                app:layout_constraintTop_toBottomOf="@id/tv_confirm_password"
+                app:layout_constraintLeft_toLeftOf="parent"/>
+
+            <Button
+                android:id="@+id/btn_submit"
+                android:text="Submit"
+                android:background="@android:color/holo_green_dark"
+                android:textColor="@android:color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/et_confirm_password"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:visibility="invisible"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,6 +6,7 @@
     android:layout_width="280dp"
     android:layout_height="430dp"
     android:orientation="vertical"
+    android:padding="10dp"
     android:background="@color/colorPrimary"
     tools:context=".fragment.AddTripFragment">
 
@@ -18,11 +19,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <SearchView
-                android:id="@+id/search_airport"
+            <TextView
+                android:id="@+id/tv_airport"
+                style="@style/tvTripForm"
+                android:textColor="#fff"
+                android:text="@string/airport_name"/>
+
+            <EditText
+                android:id="@+id/et_airport"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:queryHint="@string/search_airports" />
+                android:layout_below="@id/tv_airport"
+                android:paddingBottom="10dp"/>
+
+            <TextView
+                android:id="@+id/tv_date"
+                style="@style/tvTripForm"
+                android:text="@string/date_of_trip"
+                android:textColor="#fff"
+                android:layout_below="@id/et_airport" />
 
             <EditText
                 android:id="@+id/edit_date"
@@ -30,72 +45,62 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="date"
-                android:layout_below="@id/search_airport"
+                android:layout_below="@id/tv_date"
                 android:paddingBottom="10dp"/>
-
-            <!--add a calendar view here programatically -->
 
             <TextView
                 android:id="@+id/text_num_passengers"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="@string/number_of_passengers"
                 android:layout_below="@id/edit_date"
-                android:paddingRight="10dp"
-                android:paddingBottom="10dp"/>
+                android:textColor="#fff"
+                style="@style/tvTripForm"/>
 
             <EditText
                 android:id="@+id/edit_num_passengers"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_toEndOf="@id/text_num_passengers"
-                android:layout_below="@id/edit_date" />
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/text_num_passengers"
+                android:paddingBottom="10dp"/>
 
             <TextView
                 android:id="@+id/text_num_children"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/tvTripForm"
                 android:text="@string/number_of_children"
-                android:layout_below="@id/edit_num_passengers"
-                android:paddingBottom="10dp"
-                android:paddingEnd="10dp"/>
+                android:textColor="#fff"
+                android:layout_below="@id/edit_num_passengers" />
 
             <EditText
                 android:id="@+id/edit_num_children"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
                 android:inputType="number"
-                android:layout_toEndOf="@id/text_num_children"
-                android:layout_below="@id/edit_num_passengers" />
+                android:layout_below="@id/text_num_children"
+                android:paddingBottom="10dp"/>
 
             <TextView
                 android:id="@+id/text_luggage_type"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/tvTripForm"
                 android:text="@string/type_of_luggage"
-                android:layout_below="@id/edit_num_children"
-                android:paddingEnd="10dp"
-                android:paddingBottom="10dp"/>
+                android:textColor="#fff"
+                android:layout_below="@id/edit_num_children"/>
 
             <EditText
                 android:id="@+id/edit_luggage"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_toEndOf="@id/text_num_children"
-                android:layout_below="@id/edit_num_children"
-                android:paddingBottom="10dp"/>
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/text_luggage_type"/>
 
             <EditText
                 android:id="@+id/edit_additional_requests"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:hint="@string/additional_requests"
-                android:layout_below="@id/edit_luggage"/>
-
+                android:layout_below="@id/edit_luggage" />
 
         </RelativeLayout>
 
     </ScrollView>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -106,7 +111,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
             android:layout_marginEnd="20dp"
-            android:paddingTop="20dp"
+            android:layout_marginTop="20dp"
             android:text="@string/cancel"/>
 
         <Button
@@ -114,7 +119,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@id/btn_cancel"
-            android:paddingTop="20dp"
+            android:layout_marginTop="20dp"
             android:text="@string/submit"/>
 
     </RelativeLayout>

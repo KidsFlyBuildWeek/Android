@@ -29,7 +29,7 @@ class AddTripFragment : Fragment() {
         tripViewModel = ViewModelProvider(requireActivity()).get(TripViewModel::class.java) //gets the view model from the attached activity
 
         val edit_date = view.findViewById<EditText>(R.id.edit_date)
-        val search_airport = view.findViewById<SearchView>(R.id.search_airport)
+        val edit_airport = view.findViewById<EditText>(R.id.et_airport)
         val edit_num_passengers = view.findViewById<EditText>(R.id.edit_num_passengers)
         val edit_num_children = view.findViewById<EditText>(R.id.edit_num_children)
         val edit_luggage = view.findViewById<EditText>(R.id.edit_luggage)
@@ -45,10 +45,10 @@ class AddTripFragment : Fragment() {
         }
 
         view.findViewById<Button>(R.id.btn_submit).setOnClickListener {
-            if(search_airport.query != "" && edit_date.text.toString() != "" && edit_num_passengers.text.toString() != ""
+            if(edit_airport.text.toString() != "" && edit_date.text.toString() != "" && edit_num_passengers.text.toString() != ""
                 && edit_num_children.text.toString() != "" && edit_luggage.text.toString() != ""){
 
-                val trip = Trip(tripSize, edit_date.text.toString(), search_airport.query.toString(), edit_num_passengers.text.toString().toInt(),
+                val trip = Trip(tripSize, edit_date.text.toString(), edit_airport.text.toString(), edit_num_passengers.text.toString().toInt(),
                     edit_num_children.text.toString().toInt(), edit_luggage.toString())
 
                 //CreateAsyncTask(tripViewModel).execute(trip)
@@ -68,8 +68,8 @@ class AddTripFragment : Fragment() {
         calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
             //Note that months are indexed from 0. So, 0 means january, 1 means February, 2 means march etc.
             //must add the date to the edit_date
-            var dayMonth: String = dayOfMonth.toString()
-            var mon: String = month.toString()
+            val dayMonth: String = dayOfMonth.toString()
+            val mon: String = month.toString()
 
             edit_date.setText("$dayMonth / $mon / $year")
             relativeLayout.removeView(view) //get rid of calendar view

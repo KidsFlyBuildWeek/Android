@@ -21,7 +21,7 @@ class HomepageActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
     lateinit var tripViewModel: TripViewModel
-    //lateinit var user: UserProfile
+    lateinit var user: UserProfile
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +29,7 @@ class HomepageActivity : AppCompatActivity() {
         setContentView(R.layout.activity_homepage)
         setSupportActionBar(findViewById(R.id.top_toolbar))
 
-        //user = intent.getSerializableExtra("User")!! as UserProfile
+        user = intent.getSerializableExtra("User")!! as UserProfile
 
         tripViewModel = ViewModelProvider(this).get(TripViewModel::class.java)
 
@@ -39,7 +39,7 @@ class HomepageActivity : AppCompatActivity() {
         setupSideNavigation()
         setupActionBar()
 
-        //side_navigation.getHeaderView(0).findViewById<TextView>(R.id.tv_user).text = "${user.username}\n${user.name}"
+        side_navigation.getHeaderView(0).findViewById<TextView>(R.id.tv_user).text = "${user.username}\n\n${user.name}"
     }
 
     private fun setupBottomNavigation(){

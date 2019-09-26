@@ -28,4 +28,6 @@
     <string name="address">Address</string>
     <string name="username">Username</string>
     <string name="alert_staff">Alert Staff!</string>
+    <string name="date_of_trip">Date of Trip</string>
+    <string name="airport_name">Airport Name</string>
 </resources>

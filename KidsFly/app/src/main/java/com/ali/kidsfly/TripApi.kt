@@ -8,10 +8,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 import java.util.concurrent.TimeUnit
 
 interface TripApi {
@@ -20,7 +17,7 @@ interface TripApi {
     fun postUserProfile(@Body user: UserProfile) : Call<UserProfile>
 
     @GET("parents/{parentid}")
-    fun getUserProfileInformation(@Query("parentid") parentid: Int): Call<DownloadedUserProfile>
+    fun getUserProfileInformation(@Path("parentid") parentid: Int): Call<DownloadedUserProfile>
 
     companion object{
 

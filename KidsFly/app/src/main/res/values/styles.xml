@@ -24,6 +24,18 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
+    <style name="tvTripForm">
+        <item name="android:paddingBottom">5dp</item>
+        <item name="android:paddingEnd">10dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="etTripForm">
+        <item name="android:layout_width">25dp</item>
+        <item name="android:layout_height">25dp</item>
+    </style>
+
     <style name="MenuTheme">
         <item name="android:actionMenuTextColor">@color/design_default_color_error</item>
     </style>
