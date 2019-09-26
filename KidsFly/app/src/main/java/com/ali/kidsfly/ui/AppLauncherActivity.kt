@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.ali.kidsfly.R
+import com.ali.kidsfly.TripApi
 import kotlinx.android.synthetic.main.activity_app_launcher.*
 
 class AppLauncherActivity : AppCompatActivity() {
@@ -17,7 +18,10 @@ class AppLauncherActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-
+        signIn.setOnClickListener{
+            val intent= Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
+        }
 
     }
 }

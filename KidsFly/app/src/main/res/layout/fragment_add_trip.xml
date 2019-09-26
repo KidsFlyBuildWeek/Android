@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="280dp"
     android:layout_height="430dp"
+    android:orientation="vertical"
+    android:background="@color/colorPrimary"
     tools:context=".fragment.AddTripFragment">
 
     <ScrollView
@@ -28,7 +30,8 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="date"
-                android:layout_below="@id/search_airport"/>
+                android:layout_below="@id/search_airport"
+                android:paddingBottom="10dp"/>
 
             <!--add a calendar view here programatically -->
 
@@ -38,16 +41,82 @@
                 android:layout_height="wrap_content"
                 android:text="@string/number_of_passengers"
                 android:layout_below="@id/edit_date"
-                android:paddingRight="10dp"/>
+                android:paddingRight="10dp"
+                android:paddingBottom="10dp"/>
 
             <EditText
+                android:id="@+id/edit_num_passengers"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_toEndOf="@id/text_num_passengers"
                 android:layout_below="@id/edit_date" />
 
+            <TextView
+                android:id="@+id/text_num_children"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/number_of_children"
+                android:layout_below="@id/edit_num_passengers"
+                android:paddingBottom="10dp"
+                android:paddingEnd="10dp"/>
+
+            <EditText
+                android:id="@+id/edit_num_children"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:inputType="number"
+                android:layout_toEndOf="@id/text_num_children"
+                android:layout_below="@id/edit_num_passengers" />
+
+            <TextView
+                android:id="@+id/text_luggage_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/type_of_luggage"
+                android:layout_below="@id/edit_num_children"
+                android:paddingEnd="10dp"
+                android:paddingBottom="10dp"/>
+
+            <EditText
+                android:id="@+id/edit_luggage"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_toEndOf="@id/text_num_children"
+                android:layout_below="@id/edit_num_children"
+                android:paddingBottom="10dp"/>
+
+            <EditText
+                android:id="@+id/edit_additional_requests"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:hint="@string/additional_requests"
+                android:layout_below="@id/edit_luggage"/>
+
+
         </RelativeLayout>
 
     </ScrollView>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-</FrameLayout>
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="20dp"
+            android:paddingTop="20dp"
+            android:text="@string/cancel"/>
+
+        <Button
+            android:id="@+id/btn_submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/btn_cancel"
+            android:paddingTop="20dp"
+            android:text="@string/submit"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

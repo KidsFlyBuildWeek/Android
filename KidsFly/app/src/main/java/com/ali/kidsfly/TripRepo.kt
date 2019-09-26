@@ -10,26 +10,48 @@ class TripRepo(context: Context): TripDao {
     private val contxt = context.applicationContext
 
     override fun createTripEntry(trip: Trip) {
-        database.tripDao().createTripEntry(trip)
+        if(trip.isCurrentTrip){
+            currentTripsDatabase.tripDao().createTripEntry(trip)
+        } else{
+            savedTripsDatabase.tripDao().createTripEntry(trip)
+        }
     }
 
     override fun updateTripEntry(trip: Trip) {
-        database.tripDao().updateTripEntry(trip)
+        if(trip.isCurrentTrip){
+            currentTripsDatabase.tripDao().updateTripEntry(trip)
+        } else{
+            savedTripsDatabase.tripDao().updateTripEntry(trip)
+        }
     }
 
-    override fun getAllTrips(): LiveData<MutableList<Trip>> {
-        return database.tripDao().getAllTrips()
+    override fun getAllCurrentTrips(): LiveData<MutableList<Trip>> {
+        return currentTripsDatabase.tripDao().getAllCurrentTrips()
+    }
+
+    override fun getAllSavedTrips(): LiveData<MutableList<Trip>> {
+        return savedTripsDatabase.tripDao().getAllCurrentTrips()
     }
 
     override fun deleteTrip(trip: Trip) {
-        database.tripDao().deleteTrip(trip)
+        if(trip.isCurrentTrip) {
+            currentTripsDatabase.tripDao().deleteTrip(trip)
+        }
     }
 
-    private val database by lazy{
+    private val currentTripsDatabase by lazy{
         Room.databaseBuilder(
             contxt,
             TripDatabase::class.java,
             "entry_database"
+        ).fallbackToDestructiveMigration().build()
+    }
+
+    private val savedTripsDatabase by lazy{
+        Room.databaseBuilder(
+            contxt,
+            TripDatabase::class.java,
+            "entry_database2"
         ).fallbackToDestructiveMigration().build()
     }
 }

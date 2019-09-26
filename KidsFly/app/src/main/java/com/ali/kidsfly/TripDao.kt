@@ -14,7 +14,10 @@ interface TripDao {
     fun updateTripEntry(trip: Trip)
 
     @Query("SELECT * FROM trip")
-    fun getAllTrips(): LiveData<MutableList<Trip>>
+    fun getAllCurrentTrips(): LiveData<MutableList<Trip>>
+
+    @Query("SELECT * FROM trip")
+    fun getAllSavedTrips(): LiveData<MutableList<Trip>>
 
     @Delete
     fun deleteTrip(trip: Trip)

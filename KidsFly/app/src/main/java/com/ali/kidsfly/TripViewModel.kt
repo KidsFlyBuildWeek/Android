@@ -7,7 +7,7 @@ import com.ali.kidsfly.model.Trip
 
 class TripViewModel(application: Application): AndroidViewModel(application), TripDao {
 
-    val tripRepo = TripRepo(application)
+    private val tripRepo = TripRepo(application)
 
     override fun createTripEntry(trip: Trip) {
         tripRepo.createTripEntry(trip)
@@ -17,8 +17,12 @@ class TripViewModel(application: Application): AndroidViewModel(application), Tr
         tripRepo.updateTripEntry(trip)
     }
 
-    override fun getAllTrips(): LiveData<MutableList<Trip>> {
-        return tripRepo.getAllTrips()
+    override fun getAllCurrentTrips(): LiveData<MutableList<Trip>> {
+        return tripRepo.getAllCurrentTrips()
+    }
+
+    override fun getAllSavedTrips(): LiveData<MutableList<Trip>> {
+        return tripRepo.getAllSavedTrips()
     }
 
     override fun deleteTrip(trip: Trip) {
