@@ -1,6 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimary"
+    android:padding="15dp">
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/tv_airport_name"
+        android:text="Dummy text"
+        android:textSize="24sp"
+        android:textColor="#fff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tv_date"
+        android:text="13/12/2019"
+        android:textSize="18sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:paddingStart="150dp"
+        android:textColor="#fff"
+        android:layout_toRightOf="@id/tv_airport_name"/>
+
+    <Button
+        android:id="@+id/btn_alert"
+        android:text="@string/alert_staff"
+        android:textColor="#fff"
+        android:background="#f00"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_airport_name"
+        android:padding="5dp"
+        android:layout_marginTop="15dp"/>
+    
+    <TextView
+        android:id="@+id/tv_num_passengers"
+        android:textSize="20sp"
+        android:text="# of Passengers: 5"
+        android:textColor="#fff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_airport_name"
+        android:layout_toRightOf="@id/btn_alert"
+        android:layout_marginStart="55dp"
+        android:paddingTop="10dp"/>
+
+    <TextView
+        android:id="@+id/tv_num_children"
+        android:textSize="20sp"
+        android:text="# of Children: 1"
+        android:textColor="#fff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_num_passengers"
+        android:layout_toRightOf="@id/btn_alert"
+        android:layout_marginStart="55dp"
+        android:paddingTop="10dp"/>
+
+</RelativeLayout>
