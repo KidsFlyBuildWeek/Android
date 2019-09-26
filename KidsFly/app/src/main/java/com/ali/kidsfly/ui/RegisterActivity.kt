@@ -45,28 +45,27 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    class PostUserProfileAsyncTask(activity: RegisterActivity) : AsyncTask<UserProfile, Void, Call<UserProfile>>() {
+    class PostUserProfileAsyncTask(activity: RegisterActivity) : AsyncTask<UserProfile, Void, Call<Unit>>() {
         private val act = WeakReference(activity)
 
-        override fun doInBackground(vararg p0: UserProfile?): Call<UserProfile> {
+        override fun doInBackground(vararg p0: UserProfile?): Call<Unit> {
             return TripApi.getTripApiCall().postUserProfile(p0[0]!!)
         }
 
-        override fun onPostExecute(result: Call<UserProfile>?) {
+        override fun onPostExecute(result: Call<Unit>?) {
             result?.let { res ->
                 act.get()?.let {
                     it.findViewById<ProgressBar>(R.id.progress_bar).visibility = View.GONE
 
-                    res.enqueue(object : Callback<UserProfile> {
-                        override fun onFailure(call: Call<UserProfile>, t: Throwable) {
+                    res.enqueue(object : Callback<Unit> {
+                        override fun onFailure(call: Call<Unit>, t: Throwable) {
                             Toast.makeText(it, "User profile upload failed", Toast.LENGTH_SHORT).show()
                         }
 
-                        override fun onResponse(call: Call<UserProfile>, response: Response<UserProfile>) {
+                        override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
                             val s = response.headers().get("Location")
-                            val parentId = Integer.parseInt(s!!.replace("[\\D]", ""))
-                            AppLauncherActivity.GetUserSignInAsyncTask(it)
-                                .execute(parentId) //gets the post that's just created
+                            val i = s!!.substring(s.lastIndexOf("/") + 1).toInt()
+                            AppLauncherActivity.GetUserSignInAsyncTask(it).execute(i) //gets the post that's just created
                         }
                     })
                 }

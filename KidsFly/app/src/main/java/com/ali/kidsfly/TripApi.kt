@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit
 interface TripApi {
 
     @POST("parents/new")
-    fun postUserProfile(@Body user: UserProfile) : Call<UserProfile>
+    fun postUserProfile(@Body user: UserProfile) : Call<Unit>
 
     @GET("parents/{parentid}")
     fun getUserProfileInformation(@Path("parentid") parentid: Int): Call<DownloadedUserProfile>
