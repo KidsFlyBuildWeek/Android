@@ -50,6 +50,7 @@
             android:paddingStart="70dp"/>
 
         <EditText
+            android:id="@+id/et_luggage"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_luggage"
@@ -70,7 +71,7 @@
             android:paddingStart="30dp"/>
 
         <EditText
-            android:id="@+id/et_trip_date"
+            android:id="@+id/et_num_children"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_num_children"

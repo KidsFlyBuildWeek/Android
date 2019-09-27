@@ -16,12 +16,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.room.Room
 import com.ali.kidsfly.R
+import com.ali.kidsfly.api.TripApi
 import com.ali.kidsfly.api.UserApi
 import com.ali.kidsfly.dao.TripDao
 import com.ali.kidsfly.database.TripDatabase
-import com.ali.kidsfly.model.DownloadedUserProfile
-import com.ali.kidsfly.model.Trip
-import com.ali.kidsfly.model.UserProfile
+import com.ali.kidsfly.model.*
 import com.ali.kidsfly.ui.AppLauncherActivity
 import com.ali.kidsfly.ui.HomepageActivity
 import com.ali.kidsfly.ui.RegisterActivity
@@ -31,66 +30,57 @@ import retrofit2.Response
 import java.lang.UnsupportedOperationException
 import java.lang.ref.WeakReference
 
-class UserRepo(context: Context): TripDao {
+class UserRepo(context: Context) {
 
     private val contxt = context.applicationContext
+    val currentTrips = mutableListOf<Trip>()
+    private val currentTripsLiveData = MutableLiveData <MutableList<Trip>>()
 
-    //call this from within AppLauncherActivity, this will get the user profile, and then switch the screen to the homepage when done, passing
-    //the downloaded user profile through to that activity
+    /*
+        This is the creation, retrieval and updating of any user profile information
+     */
+
+    /*call this from within AppLauncherActivity, this will get the user profile, and then switch the screen to the homepage when done, passing
+    the downloaded user profile through to that activity*/
     fun getUserProfile(parentId: Int){
         GetUserSignInAsyncTask(contxt as Activity).execute(parentId)
     }
 
-    //call this from within the RegistrationActivity this will post the user profile to the API, and will also go to the homepage after
-    // fetching the ID of the just created user profile
+    /*call this from within the RegistrationActivity this will post the user profile to the API, and will also go to the homepage after
+     fetching the ID of the just created user profile*/
     fun registerUserProfile(user: UserProfile){
         PostUserProfileAsyncTask(contxt as Activity).execute(user)
     }
 
-    fun updateUserProfile(user: UserProfile){ //updates the whole user profile
+    //updates the whole user profile
+    fun updateUserProfile(user: UserProfile){
         val intent = Intent(contxt, UpdateUserProfileApiService::class.java)
         intent.putExtra("UserProfile", user)
         contxt.startService(intent)
     }
 
-    //ONLY UPDATE THE API WITH THE TRIP INFORMATION WHEN THE USER SIGNS OUT OR the activity is destroyed with OnStop (user gets rid of app screen)
-
-    fun createCurrentTrip(trip: Trip){ //add it to UserProfile trips object then update it in the api at a certain point
-
+    //we are going to read all the current trips and wrap it in live data so that we can observe any changes to the trips list in userprofile
+    fun readAllCurrentTripsAsLiveData(user: UserProfile): MutableLiveData<MutableList<Trip>>{
+        //add all the trips inside user profile to current trips
+        (user as DownloadedUserProfile).trips.forEach {
+            val trip = it as Trip
+            currentTrips.add(trip)
+        }
+        currentTripsLiveData.value = currentTrips
+        return currentTripsLiveData
     }
 
-    fun deleteCurrentTrip(trip: Trip){ //delete this trip from the user profile and eventually update in the api
-
+    fun addTripToCurrentTrips(trip: TripToPost){
+        currentTrips.add(trip as Trip)
     }
 
-    fun updateCurrentTrip(trip: Trip){ //updates a current trip inside user profile and eventually update in the api
-
-    }
-
-    //pass in the user profile, it will wrap the trips mutable list in live data and return it
-    fun getAllCurrentTripsAsLiveData(user: UserProfile): MutableLiveData<MutableList<Trip>> {
-        return MutableLiveData<MutableList<Trip>>((user as DownloadedUserProfile).trips)
+    fun postTripToApi(trip: TripToPost){
+        PostTripApiAsyncTask(contxt as Activity).execute(trip)
     }
 
     /*
-    The functions below access a room database that stores and retrieves information on trips that are past!
+        Necessary async tasks and services to fetch and post api data
      */
-
-    override fun createSavedTripEntry(trip: Trip) {
-        savedTripsDatabase.tripDao().createSavedTripEntry(trip)
-    }
-
-    override fun getAllSavedTrips(): LiveData<MutableList<Trip>> {
-        return savedTripsDatabase.tripDao().getAllSavedTrips()
-    }
-
-    private val savedTripsDatabase by lazy{
-        Room.databaseBuilder(
-            contxt,
-            TripDatabase::class.java,
-            "entry_database2"
-        ).fallbackToDestructiveMigration().build()
-    }
 
     class PostUserProfileAsyncTask(activity: Activity) : AsyncTask<UserProfile, Void, Call<Unit>>() {
         private val act = WeakReference(activity)
@@ -148,6 +138,14 @@ class UserRepo(context: Context): TripDao {
                     }
                 })
             }
+        }
+    }
+
+    class PostTripApiAsyncTask(activity: Activity): AsyncTask<TripToPost, Void, Call<Unit>>(){
+        private val act = WeakReference(activity)
+
+        override fun doInBackground(vararg trip: TripToPost?): Call<Unit> {
+            return TripApi.getTripApiCall().postTrip(trip[0]!!)
         }
     }
 

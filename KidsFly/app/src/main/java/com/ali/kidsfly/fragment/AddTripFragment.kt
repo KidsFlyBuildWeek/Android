@@ -2,6 +2,7 @@ package com.ali.kidsfly.fragment
 
 
 import android.content.Context
+import android.opengl.Visibility
 import android.os.AsyncTask
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,7 +12,10 @@ import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.ali.kidsfly.R
+import com.ali.kidsfly.model.DownloadedUserProfile
 import com.ali.kidsfly.model.Trip
+import com.ali.kidsfly.model.TripToPost
+import com.ali.kidsfly.ui.HomepageActivity
 import com.ali.kidsfly.viewmodel.UserViewModel
 import kotlinx.android.synthetic.main.fragment_add_trip.*
 import java.lang.ref.WeakReference
@@ -20,74 +24,50 @@ import java.util.*
 
 class AddTripFragment : Fragment() {
 
-    private var tripSize = 0 //change upon loading in data from endpoint
-    private lateinit var tripViewModel: UserViewModel
+    private lateinit var userViewModel: UserViewModel
+    private lateinit var firstView: View
+    private lateinit var secondView: View
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_add_trip, container, false)
-        tripViewModel = ViewModelProvider(requireActivity()).get(UserViewModel::class.java) //gets the view model from the attached activity
+        userViewModel = ViewModelProvider(requireActivity()).get(UserViewModel::class.java) //gets the view model from the attached activity
+        firstView = view.findViewById(R.id.first_add_trip_screen)
+        secondView = view.findViewById(R.id.second_add_trip_screen)
 
-        val edit_date = view.findViewById<EditText>(R.id.edit_date)
-        val edit_airport = view.findViewById<EditText>(R.id.et_airport)
-        val edit_num_passengers = view.findViewById<EditText>(R.id.edit_num_passengers)
-        val edit_num_children = view.findViewById<EditText>(R.id.edit_num_children)
-        val edit_luggage = view.findViewById<EditText>(R.id.edit_luggage)
-
-        edit_date.setOnClickListener {
-            //adds calendar object to the relative layout
-            val r = view.findViewById<RelativeLayout>(R.id.relative_layout)
-            r.addView(createCalendarView(r))
+        firstView.findViewById<Button>(R.id.btn_cancel).setOnClickListener {
+            //both views will have this button...just close out of this fragment
+            activity?.onBackPressed()
         }
 
-        view.findViewById<Button>(R.id.btn_cancel).setOnClickListener {
-            activity!!.onBackPressed()
+        secondView.findViewById<Button>(R.id.btn_cancel).setOnClickListener{
+            activity?.onBackPressed()
         }
 
-        view.findViewById<Button>(R.id.btn_submit).setOnClickListener {
-            if(edit_airport.text.toString() != "" && edit_date.text.toString() != "" && edit_num_passengers.text.toString() != ""
-                && edit_num_children.text.toString() != "" && edit_luggage.text.toString() != ""){
+        firstView.findViewById<Button>(R.id.btn_next).setOnClickListener {
+            firstView.visibility = View.GONE
+            secondView.visibility = View.VISIBLE
+        }
 
-                val trip = Trip(tripSize, edit_date.text.toString(), edit_airport.text.toString(), edit_num_passengers.text.toString().toInt(),
-                    edit_num_children.text.toString().toInt(), edit_luggage.toString())
+        secondView.findViewById<Button>(R.id.btn_submit).setOnClickListener {
+            val airportText = firstView.findViewById<EditText>(R.id.et_airport_code).text.toString()
+            val dateText = firstView.findViewById<EditText>(R.id.et_trip_date).text.toString()
+            val numPassengersText = secondView.findViewById<EditText>(R.id.et_num_passengers).text.toString()
+            val numChildrenText = secondView.findViewById<EditText>(R.id.et_num_children).text.toString()
+            val luggage = secondView.findViewById<EditText>(R.id.et_luggage).text.toString()
 
-                //CreateAsyncTask(tripViewModel).execute(trip)
-                activity!!.onBackPressed()
+            if(airportText != "" && dateText != "" && numPassengersText != "" && numChildrenText != ""){
+                val trip = TripToPost(dateText, airportText, numPassengersText.toInt(), numChildrenText.toInt(), luggage, HomepageActivity.user as DownloadedUserProfile)
+                userViewModel.addTripsToCurrentTrips(trip)
+                userViewModel.postTripToApi(trip)
             }
         }
+
+        secondView.findViewById<Button>(R.id.btn_previous).setOnClickListener {
+            firstView.visibility = View.VISIBLE
+            secondView.visibility = View.GONE
+        }
+
         return view
     }
-
-    //returns a calendar with today's time as minimum time
-    private fun createCalendarView(relativeLayout: RelativeLayout): CalendarView{
-        val calendarView = CalendarView(activity as Context)
-        calendarView.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
-        calendarView.setMinDate(Date().time)
-        (relativeLayout.layoutParams as RelativeLayout.LayoutParams).addRule(RelativeLayout.BELOW, R.id.edit_date)
-
-        calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
-            //Note that months are indexed from 0. So, 0 means january, 1 means February, 2 means march etc.
-            //must add the date to the edit_date
-            val dayMonth: String = dayOfMonth.toString()
-            val mon: String = month.toString()
-
-            edit_date.setText("$dayMonth / $mon / $year")
-            relativeLayout.removeView(view) //get rid of calendar view
-        }
-        return calendarView
-    }
-
-    class CreateAsyncTask(viewModel: UserViewModel): AsyncTask<Trip, Void, Unit>(){
-        private val viewModel = WeakReference(viewModel)
-
-        override fun doInBackground(vararg trip: Trip?) {
-            if(trip.isNotEmpty()){
-                trip[0]?.let{
-                    //viewModel.get()?
-                    CurrentTrips.tripSize += 1
-                }
-            }
-        }
-    }
-
 }

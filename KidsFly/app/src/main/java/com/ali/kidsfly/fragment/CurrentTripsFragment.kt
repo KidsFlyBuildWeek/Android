@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ali.kidsfly.R
-import com.ali.kidsfly.SwipeRightToDelete
 import com.ali.kidsfly.adapter.TripListAdapter
 import com.ali.kidsfly.model.Trip
 import com.ali.kidsfly.viewmodel.UserViewModel
@@ -27,7 +26,6 @@ class CurrentTrips : Fragment() {
     }
     private lateinit var tripListAdapter: TripListAdapter
     private lateinit var userViewModel: UserViewModel
-    private lateinit var swipeRightToDelete: SwipeRightToDelete
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -35,10 +33,8 @@ class CurrentTrips : Fragment() {
 
         userViewModel = ViewModelProvider(requireActivity()).get(UserViewModel::class.java) //gets the view model from the attached activity
         tripListAdapter = TripListAdapter(mutableListOf()) //replace with current trips
-        swipeRightToDelete = SwipeRightToDelete(tripListAdapter)
 
         setupRecyclerView(view)
-        ItemTouchHelper(swipeRightToDelete).attachToRecyclerView(recycler_view)
 
         val fab = (view.findViewById<CoordinatorLayout>(R.id.floating_action_layout)).findViewById<FloatingActionButton>(R.id.fab)
 
@@ -63,17 +59,4 @@ class CurrentTrips : Fragment() {
         tripSize = it.size
 
     }
-
-//    inner class ReadAllAsyncTask(activity: Activity) : AsyncTask<Void, Void, LiveData<MutableList<Trip>>>(){
-//
-//        private val activity = WeakReference(activity)
-//
-//        override fun onPostExecute(result: LiveData<MutableList<Trip>>?) {
-//            super.onPostExecute(result)
-//        }
-//
-//        override fun doInBackground(vararg p0: Void?): LiveData<MutableList<Trip>> {
-//            return (activity as HomepageActivity).tripViewModel.getAllTrips()
-//        }
-//    }
 }

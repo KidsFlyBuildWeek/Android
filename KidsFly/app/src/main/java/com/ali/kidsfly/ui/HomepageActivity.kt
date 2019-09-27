@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.ali.kidsfly.R
 import com.ali.kidsfly.adapter.TripListAdapter
 import com.ali.kidsfly.model.DownloadedUserProfile
@@ -15,6 +16,7 @@ import com.ali.kidsfly.model.Trip
 import com.ali.kidsfly.model.UserProfile
 import com.ali.kidsfly.viewmodel.UserViewModel
 import kotlinx.android.synthetic.main.activity_homepage.*
+import kotlinx.android.synthetic.main.fragment_current_trips.*
 
 class HomepageActivity : AppCompatActivity() {
 
@@ -35,7 +37,9 @@ class HomepageActivity : AppCompatActivity() {
         user = intent.getSerializableExtra("User")!! as UserProfile
 
         setTripsAsObservable()
-        currentTripsAdapter = TripListAdapter((user as DownloadedUserProfile).trips)
+        currentTripsAdapter = TripListAdapter(userViewModel.getCurrentTrips())
+
+        setupRecyclerView()
 
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)
 
@@ -74,7 +78,14 @@ class HomepageActivity : AppCompatActivity() {
 
     override fun onStop() {
         //update the api regarding the user profile
-        userViewModel.updateUserProfile(user)
         super.onStop()
+    }
+
+    private fun setupRecyclerView() {
+        val manager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        recycler_view.apply{
+            adapter = currentTripsAdapter
+            layoutManager = manager
+        }
     }
 }
