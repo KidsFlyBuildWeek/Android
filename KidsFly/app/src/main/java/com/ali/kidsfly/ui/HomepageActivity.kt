@@ -32,8 +32,8 @@ class HomepageActivity : AppCompatActivity() {
         setSupportActionBar(findViewById(R.id.top_toolbar))
 
         userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
-
         user = intent.getSerializableExtra("User")!! as UserProfile
+
         setTripsAsObservable()
         currentTripsAdapter = TripListAdapter((user as DownloadedUserProfile).trips)
 

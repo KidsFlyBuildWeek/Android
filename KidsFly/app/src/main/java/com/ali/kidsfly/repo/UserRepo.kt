@@ -2,6 +2,7 @@ package com.ali.kidsfly.repo
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.Application
 import android.app.Service
 import android.content.Context
 import android.content.Intent
@@ -37,13 +38,13 @@ class UserRepo(context: Context): TripDao {
     //call this from within AppLauncherActivity, this will get the user profile, and then switch the screen to the homepage when done, passing
     //the downloaded user profile through to that activity
     fun getUserProfile(parentId: Int){
-        GetUserSignInAsyncTask(contxt as AppLauncherActivity).execute(parentId)
+        GetUserSignInAsyncTask(contxt as Activity).execute(parentId)
     }
 
     //call this from within the RegistrationActivity this will post the user profile to the API, and will also go to the homepage after
     // fetching the ID of the just created user profile
     fun registerUserProfile(user: UserProfile){
-        PostUserProfileAsyncTask(contxt as RegisterActivity).execute(user)
+        PostUserProfileAsyncTask(contxt as Activity).execute(user)
     }
 
     fun updateUserProfile(user: UserProfile){ //updates the whole user profile
@@ -91,7 +92,7 @@ class UserRepo(context: Context): TripDao {
         ).fallbackToDestructiveMigration().build()
     }
 
-    class PostUserProfileAsyncTask(activity: RegisterActivity) : AsyncTask<UserProfile, Void, Call<Unit>>() {
+    class PostUserProfileAsyncTask(activity: Activity) : AsyncTask<UserProfile, Void, Call<Unit>>() {
         private val act = WeakReference(activity)
 
         override fun doInBackground(vararg p0: UserProfile?): Call<Unit> {
@@ -119,7 +120,7 @@ class UserRepo(context: Context): TripDao {
         }
     }
 
-    class GetUserSignInAsyncTask(activity: AppCompatActivity) : AsyncTask<Int, Void, Call<DownloadedUserProfile>>(){
+    class GetUserSignInAsyncTask(activity: Activity) : AsyncTask<Int, Void, Call<DownloadedUserProfile>>(){
         private val act = WeakReference(activity)
 
         override fun doInBackground(vararg p0: Int?): Call<DownloadedUserProfile> {

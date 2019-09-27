@@ -8,10 +8,12 @@ import android.view.View
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.ali.kidsfly.R
 import com.ali.kidsfly.api.UserApi
 import com.ali.kidsfly.model.DownloadedUserProfile
 import com.ali.kidsfly.repo.UserRepo
+import com.ali.kidsfly.viewmodel.UserViewModel
 import kotlinx.android.synthetic.main.activity_app_launcher.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -20,12 +22,12 @@ import java.lang.ref.WeakReference
 
 class AppLauncherActivity : AppCompatActivity(){
 
-    private lateinit var userRepo: UserRepo
+    private lateinit var userViewModel: UserViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_app_launcher)
-        userRepo = UserRepo(this)
+        userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
 
         register.setOnClickListener {
             val intent= Intent(this, RegisterActivity::class.java)
@@ -34,7 +36,7 @@ class AppLauncherActivity : AppCompatActivity(){
 
         signIn.setOnClickListener{
             progress_bar.visibility = View.VISIBLE
-            userRepo.getUserProfile(2) //hard code for now
+            userViewModel.getUserProfile(2) //hard code for now
         }
     }
 }

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/rounded_corners"
+    android:padding="15dp">
+
+    <TextView
+        android:text="@string/travel_information"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:textColor="#fff"
+        android:textSize="24sp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"/>
+
+    <TextView
+        android:id="@+id/tv_airport_code"
+        android:text="@string/enter_airport_code"
+        style="@style/tvTripForm"
+        android:paddingTop="20dp"/>
+
+    <EditText
+        android:id="@+id/et_airport_code"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tv_date_view"
+        android:text="@string/date_of_trip"
+        style="@style/tvTripForm"
+        android:paddingTop="20dp"/>
+
+    <EditText
+        android:id="@+id/et_trip_date"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="20dp">
+
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="65dp"
+            android:layout_marginEnd="65dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/cancel"/>
+
+        <Button
+            android:id="@+id/btn_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/btn_cancel"
+            android:layout_marginTop="20dp"
+            android:text="@string/next"/>
+
+    </RelativeLayout>
+
+</LinearLayout>
