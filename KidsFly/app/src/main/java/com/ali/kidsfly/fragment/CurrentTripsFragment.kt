@@ -1,6 +1,5 @@
 package com.ali.kidsfly.fragment
 
-
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -21,9 +20,6 @@ import kotlinx.android.synthetic.main.fragment_current_trips.*
 
 class CurrentTrips : Fragment() {
 
-    companion object {
-        var tripSize = 0 //change upon loading in data from endpoint
-    }
     private lateinit var tripListAdapter: TripListAdapter
     private lateinit var userViewModel: UserViewModel
 
@@ -52,11 +48,5 @@ class CurrentTrips : Fragment() {
             layoutManager = LinearLayoutManager(activity as Context, LinearLayoutManager.VERTICAL, false)
             adapter = tripListAdapter
         }
-    }
-
-
-    private fun updateCurrentTrips(it: MutableList<Trip>){
-        tripSize = it.size
-
     }
 }

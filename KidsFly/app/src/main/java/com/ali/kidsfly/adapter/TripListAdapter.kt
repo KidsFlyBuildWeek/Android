@@ -6,8 +6,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ali.kidsfly.R
 import com.ali.kidsfly.model.Trip
-import kotlinx.android.synthetic.main.fragment_add_trip.view.*
-import kotlinx.android.synthetic.main.fragment_add_trip.view.tv_date
 import kotlinx.android.synthetic.main.trip_view.view.*
 
 

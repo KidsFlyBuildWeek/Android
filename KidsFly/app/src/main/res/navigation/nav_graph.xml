@@ -39,7 +39,7 @@
         tools:layout="@layout/activity_app_launcher" />
     <activity
         android:id="@+id/registerActivity"
-        android:name="com.ali.kidsfly.ui.RegisterActivity"
+        android:name="com.ali.kidsfly.ui.RegistrationActivity"
         android:label="activity_register"
         tools:layout="@layout/activity_register" />
     <fragment

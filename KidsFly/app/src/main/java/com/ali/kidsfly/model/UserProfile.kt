@@ -10,20 +10,26 @@ open class UserProfile(val username: String, val password: String, val phone: St
 
 
 class DownloadedUserProfile(username: String, password: String, phone: String, email: String, name: String, address: String,
-                            airport: String, val trips: MutableList<TripWithId>, val parentid: Int, val status: String)
+                            airport: String, val trips: MutableList<Trip>, val parentid: Int, val status: String)
                             : UserProfile(username, password, phone, email, name, address, airport), Serializable
 
 
+
+@Entity
 open class Trip(val date: String, val airport: String, val passengercount: Int, val childcount: Int,
-           val luggagetype: String, val isCurrentTrip: Boolean = true)
+           val luggagetype: String, val isCurrentTrip: Boolean = true){
+
+    @PrimaryKey(autoGenerate = true) //this is so unintuitive
+    var tripid: Int = 0
+}
 
 //this is the trip that I will be posting
 class TripToPost(date: String, airport: String, passengercount: Int, childcount: Int,
                  luggagetype: String, parentuser: DownloadedUserProfile)
                 : Trip(date, airport, passengercount, childcount, luggagetype)
 
-//this is the trip that we will receive when we download a new user profile
-@Entity
-class TripWithId(date: String, airport: String, passengercount: Int, childcount: Int,
-                 luggagetype: String, isCurrentTrip: Boolean = true, @PrimaryKey val tripid: String)
-                : Trip(date, airport, passengercount, childcount, luggagetype, isCurrentTrip)
+//
+//////this is the trip that we will receive when we download a new user profile
+//class TripWithId(date: String, airport: String, passengercount: Int, childcount: Int,
+//                 luggagetype: String, isCurrentTrip: Boolean = true)
+//                : Trip(date, airport, passengercount, childcount, luggagetype, isCurrentTrip)

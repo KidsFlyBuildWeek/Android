@@ -1,24 +1,16 @@
 package com.ali.kidsfly.ui
 
-import android.content.Context
 import android.content.Intent
-import android.os.AsyncTask
 import android.os.Bundle
 import android.view.View
-import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.ali.kidsfly.R
-import com.ali.kidsfly.api.UserApi
 import com.ali.kidsfly.model.DownloadedUserProfile
-import com.ali.kidsfly.repo.UserRepo
 import com.ali.kidsfly.viewmodel.UserViewModel
 import kotlinx.android.synthetic.main.activity_app_launcher.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import java.lang.ref.WeakReference
 
 class AppLauncherActivity : AppCompatActivity(){
 
@@ -28,15 +20,31 @@ class AppLauncherActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_app_launcher)
         userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
-
         register.setOnClickListener {
-            val intent= Intent(this, RegisterActivity::class.java)
+            val intent= Intent(this, RegistrationActivity::class.java)
             startActivity(intent)
         }
 
         signIn.setOnClickListener{
+
             progress_bar.visibility = View.VISIBLE
-            userViewModel.getUserProfile(2) //hard code for now
+
+            userViewModel.getUserProfile(2).observe(this,
+                object: Observer<DownloadedUserProfile?>{
+                    override fun onChanged(t: DownloadedUserProfile?) {
+                        t?.let {
+                            progress_bar.visibility = View.GONE
+                            if (it.username == "") {
+                                Toast.makeText(this@AppLauncherActivity, "Sign In Failed", Toast.LENGTH_SHORT).show()
+                            } else {
+                                val intent = Intent(this@AppLauncherActivity, HomepageActivity::class.java)
+                                intent.putExtra("User", it)
+                                startActivity(intent)
+                            }
+                        }
+                    }
+                }
+            )
         }
     }
 }
