@@ -33,4 +33,8 @@
     <string name="enter_airport_code">Enter Airport Code</string>
     <string name="travel_information">Travel Information</string>
     <string name="next">next</string>
+    <string name="of_children"># of Children</string>
+    <string name="of_passengers"># of Passengers</string>
+    <string name="luggage_information">Luggage Information</string>
+    <string name="previous">Previous</string>
 </resources>
