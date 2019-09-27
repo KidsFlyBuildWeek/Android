@@ -47,7 +47,7 @@ class CurrentTrips : Fragment() {
     }
 
     private fun setTripsAsObservable(view: View) {
-        userViewModel.getCurrentUserTripsAsLiveData(HomepageActivity.user).observe(this,
+        userViewModel.getCurrentUserTripsAsLiveData(HomepageActivity.user).observe(viewLifecycleOwner,
             object: Observer<MutableList<Trip>> {
                 override fun onChanged(t: MutableList<Trip>?) {
                     currentTripsAdapter.notifyDataSetChanged()

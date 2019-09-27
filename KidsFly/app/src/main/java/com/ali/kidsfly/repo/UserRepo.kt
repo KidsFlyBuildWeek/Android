@@ -1,19 +1,25 @@
 package com.ali.kidsfly.repo
 
 import android.app.Service
+import android.content.Context
 import android.content.Intent
 import android.os.AsyncTask
 import android.os.IBinder
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.room.Room
 import com.ali.kidsfly.api.TripApi
 import com.ali.kidsfly.api.UserApi
+import com.ali.kidsfly.database.TripDatabase
 import com.ali.kidsfly.model.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.lang.UnsupportedOperationException
 
-class UserRepo() {
+class UserRepo(context: Context) {
+
+    val contxt = context.applicationContext
 
     val currentTrips = mutableListOf<Trip>()
     private val currentTripsLiveData = MutableLiveData <MutableList<Trip>>()
@@ -80,6 +86,7 @@ class UserRepo() {
 
     fun addTripToCurrentTrips(trip: TripToPost){
         currentTrips.add(trip as Trip)
+        currentTripsLiveData.postValue(currentTrips)
     }
 
     fun postTripToApi(trip: TripToPost){
@@ -91,6 +98,22 @@ class UserRepo() {
             override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
             }
         })
+    }
+
+    fun createSavedTripEntry(trip: Trip){
+        database.tripDao().createSavedTripEntry(trip)
+    }
+
+    fun getAllSavedTrips(trip: Trip): LiveData<MutableList<Trip>>{
+        return database.tripDao().getAllSavedTrips()
+    }
+
+    private val database by lazy{
+        Room.databaseBuilder(
+            contxt,
+            TripDatabase::class.java,
+            "entry_database"
+        ).fallbackToDestructiveMigration().build()
     }
 
     /*
