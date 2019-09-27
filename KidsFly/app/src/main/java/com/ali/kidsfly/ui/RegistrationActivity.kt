@@ -40,20 +40,21 @@ class RegistrationActivity : AppCompatActivity() {
                     override fun onChanged(t: Int?) {
                         t?.let{
                             userViewModel.getUserProfile(it).observe(this@RegistrationActivity,
-                            object: Observer<DownloadedUserProfile?> {
-                                override fun onChanged(t: DownloadedUserProfile?) {
-                                    t?.let {
-                                        progress_bar.visibility = View.GONE
-                                        if (it.username == "") {
-                                            Toast.makeText(this@RegistrationActivity, "Sign In After Registration Failed", Toast.LENGTH_SHORT).show()
-                                        } else {
-                                            val intent = Intent(this@RegistrationActivity, HomepageActivity::class.java)
-                                            intent.putExtra("User", it)
-                                            startActivity(intent)
+                                object: Observer<DownloadedUserProfile> {
+                                    override fun onChanged(t: DownloadedUserProfile?) {
+                                        t?.let {
+                                            progress_bar.visibility = View.GONE
+                                            if (it.username == "") {
+                                                Toast.makeText(this@RegistrationActivity, "Sign In After Registration Failed", Toast.LENGTH_SHORT).show()
+                                            } else {
+                                                val intent = Intent(this@RegistrationActivity, HomepageActivity::class.java)
+                                                intent.putExtra("User", it)
+                                                startActivity(intent)
+                                            }
                                         }
                                     }
                                 }
-                            })
+                            )
                         }
                     }
                 })

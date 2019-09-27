@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,13 +15,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ali.kidsfly.R
 import com.ali.kidsfly.adapter.TripListAdapter
 import com.ali.kidsfly.model.Trip
+import com.ali.kidsfly.ui.HomepageActivity
 import com.ali.kidsfly.viewmodel.UserViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.fragment_current_trips.*
 
 class CurrentTrips : Fragment() {
 
-    private lateinit var tripListAdapter: TripListAdapter
+    private lateinit var currentTripsAdapter: TripListAdapter
     private lateinit var userViewModel: UserViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -28,7 +30,9 @@ class CurrentTrips : Fragment() {
         val view = inflater.inflate(R.layout.fragment_current_trips, container, false)
 
         userViewModel = ViewModelProvider(requireActivity()).get(UserViewModel::class.java) //gets the view model from the attached activity
-        tripListAdapter = TripListAdapter(mutableListOf()) //replace with current trips
+        //will be able to observe any changes to the list in user if its modified
+        setTripsAsObservable()
+        currentTripsAdapter = TripListAdapter(userViewModel.getCurrentTrips())
 
         setupRecyclerView(view)
 
@@ -43,10 +47,19 @@ class CurrentTrips : Fragment() {
         return view
     }
 
+    private fun setTripsAsObservable() {
+        userViewModel.getCurrentUserTripsAsLiveData(HomepageActivity.user).observe(this,
+            object: Observer<MutableList<Trip>> {
+                override fun onChanged(t: MutableList<Trip>?) {
+                    currentTripsAdapter.notifyDataSetChanged()
+                }
+            })
+    }
+
     private fun setupRecyclerView(view: View) {
         view.findViewById<RecyclerView>(R.id.recycler_view).apply {
             layoutManager = LinearLayoutManager(activity as Context, LinearLayoutManager.VERTICAL, false)
-            adapter = tripListAdapter
+            adapter = currentTripsAdapter
         }
     }
 }

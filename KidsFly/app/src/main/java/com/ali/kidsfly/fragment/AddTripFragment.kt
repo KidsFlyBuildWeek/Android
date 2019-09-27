@@ -60,6 +60,8 @@ class AddTripFragment : Fragment() {
                 val trip = TripToPost(dateText, airportText, numPassengersText.toInt(), numChildrenText.toInt(), luggage, HomepageActivity.user as DownloadedUserProfile)
                 userViewModel.addTripsToCurrentTrips(trip)
                 userViewModel.postTripToApi(trip)
+
+                activity?.onBackPressed()
             }
         }
 

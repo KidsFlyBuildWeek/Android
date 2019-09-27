@@ -30,7 +30,7 @@ class AppLauncherActivity : AppCompatActivity(){
             progress_bar.visibility = View.VISIBLE
 
             userViewModel.getUserProfile(2).observe(this,
-                object: Observer<DownloadedUserProfile?>{
+                object: Observer<DownloadedUserProfile>{
                     override fun onChanged(t: DownloadedUserProfile?) {
                         t?.let {
                             progress_bar.visibility = View.GONE
