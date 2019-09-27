@@ -8,9 +8,8 @@ open class UserProfile(val username: String, val password: String, val phone: St
                        val airport: String = "IND") : Serializable
 
 
-@Entity
 class DownloadedUserProfile(username: String, password: String, phone: String, email: String, name: String, address: String,
-                            airport: String, val trips: MutableList<Trip>, @PrimaryKey(autoGenerate = true) val parentid: String)
+                            airport: String, val trips: MutableList<Trip>, @PrimaryKey(autoGenerate = true) val parentid: Int)
                             : UserProfile(username, password, phone, email, name, address, airport), Serializable
 
 @Entity

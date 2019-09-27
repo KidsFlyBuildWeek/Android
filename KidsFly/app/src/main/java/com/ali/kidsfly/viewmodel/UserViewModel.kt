@@ -14,4 +14,16 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
     fun getCurrentUserTripsAsLiveData(user: UserProfile): MutableLiveData<MutableList<Trip>> {
         return userRepo.getAllCurrentTripsAsLiveData(user)
     }
+
+    fun getUserProfile(parentId: Int) {
+        userRepo.getUserProfile(parentId)
+    }
+
+    fun registerUserProfile(user: UserProfile){
+        userRepo.registerUserProfile(user)
+    }
+
+    fun updateUserProfile(user: UserProfile){
+        userRepo.updateUserProfile(user)
+    }
 }

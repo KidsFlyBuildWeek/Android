@@ -1,8 +1,12 @@
 package com.ali.kidsfly.repo
 
+import android.annotation.SuppressLint
+import android.app.Activity
+import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.os.AsyncTask
+import android.os.IBinder
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.Toast
@@ -23,6 +27,7 @@ import com.ali.kidsfly.ui.RegisterActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.lang.UnsupportedOperationException
 import java.lang.ref.WeakReference
 
 class UserRepo(context: Context): TripDao {
@@ -39,6 +44,12 @@ class UserRepo(context: Context): TripDao {
     // fetching the ID of the just created user profile
     fun registerUserProfile(user: UserProfile){
         PostUserProfileAsyncTask(contxt as RegisterActivity).execute(user)
+    }
+
+    fun updateUserProfile(user: UserProfile){ //updates the whole user profile
+        val intent = Intent(contxt, UpdateUserProfileApiService::class.java)
+        intent.putExtra("UserProfile", user)
+        contxt.startService(intent)
     }
 
     //ONLY UPDATE THE API WITH THE TRIP INFORMATION WHEN THE USER SIGNS OUT OR the activity is destroyed with OnStop (user gets rid of app screen)
@@ -135,6 +146,28 @@ class UserRepo(context: Context): TripDao {
                         }
                     }
                 })
+            }
+        }
+    }
+
+    class UpdateUserProfileApiService: Service(){
+
+        override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+
+            intent?.getSerializableExtra("UserProfile")?.let{
+                val userProfile = it as DownloadedUserProfile
+                UpdateUserProfile().execute(userProfile.parentid)
+            }
+            return super.onStartCommand(intent, flags, startId)
+        }
+
+        override fun onBind(p0: Intent?): IBinder? {
+            throw(UnsupportedOperationException())
+        }
+
+        class UpdateUserProfile: AsyncTask<Int, Void, Unit>() {
+            override fun doInBackground(vararg p0: Int?): Unit {
+                return UserApi.getUserApiCall().updateUserProfile(p0[0]!!)
             }
         }
     }

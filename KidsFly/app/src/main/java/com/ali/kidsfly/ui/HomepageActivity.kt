@@ -9,6 +9,7 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import com.ali.kidsfly.R
+import com.ali.kidsfly.adapter.TripListAdapter
 import com.ali.kidsfly.model.DownloadedUserProfile
 import com.ali.kidsfly.model.Trip
 import com.ali.kidsfly.model.UserProfile
@@ -19,27 +20,22 @@ class HomepageActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
     lateinit var userViewModel: UserViewModel
+    lateinit var currentTripsAdapter: TripListAdapter
 
     companion object {
-        lateinit var user: UserProfile //this is the current
+        lateinit var user: UserProfile //this is the current user profile
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_homepage)
         setSupportActionBar(findViewById(R.id.top_toolbar))
 
-        user = intent.getSerializableExtra("User")!! as UserProfile
-
         userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
 
+        user = intent.getSerializableExtra("User")!! as UserProfile
         setTripsAsObservable()
-
-        //writes all of the trips to a database. if on pause is triggered then we will update the api
-//        (user as DownloadedUserProfile).trips.forEach{
-//            userViewModel.createTripEntry(it)
-//        }
+        currentTripsAdapter = TripListAdapter((user as DownloadedUserProfile).trips)
 
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)
 
@@ -50,11 +46,12 @@ class HomepageActivity : AppCompatActivity() {
         side_navigation.getHeaderView(0).findViewById<TextView>(R.id.tv_user).text = "${user.username}\n\n${user.name}"
     }
 
+    //will be able to observe any changes to the list in user if its modified
     private fun setTripsAsObservable() {
         userViewModel.getCurrentUserTripsAsLiveData(user).observe(this,
             object: Observer<MutableList<Trip>>{
                 override fun onChanged(t: MutableList<Trip>?) {
-
+                    currentTripsAdapter.notifyDataSetChanged()
                 }
             })
     }
@@ -73,5 +70,11 @@ class HomepageActivity : AppCompatActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         return NavigationUI.navigateUp(navController, drawer_layout)
+    }
+
+    override fun onStop() {
+        //update the api regarding the user profile
+        userViewModel.updateUserProfile(user)
+        super.onStop()
     }
 }

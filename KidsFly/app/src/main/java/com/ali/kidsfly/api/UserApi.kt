@@ -22,6 +22,9 @@ interface UserApi {
     @DELETE
     fun deleteUserProfile(user: UserProfile) //permanently deletes user profile
 
+    @PUT("parents/{parentid}")
+    fun updateUserProfile(@Path("parentid") parentid: Int)
+
     companion object{
 
         private const val BASE_URL = "https://kidsflybackend.herokuapp.com/"
