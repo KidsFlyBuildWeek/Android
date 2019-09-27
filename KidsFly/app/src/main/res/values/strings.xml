@@ -37,4 +37,5 @@
     <string name="of_passengers"># of Passengers</string>
     <string name="luggage_information">Luggage Information</string>
     <string name="previous">Previous</string>
+    <string name="past_trips">Past Trips</string>
 </resources>

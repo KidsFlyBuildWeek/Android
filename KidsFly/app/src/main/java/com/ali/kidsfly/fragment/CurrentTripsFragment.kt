@@ -30,7 +30,7 @@ class CurrentTrips : Fragment() {
         userViewModel = ViewModelProvider(requireActivity()).get(UserViewModel::class.java) //gets the view model from the attached activity
         //will be able to observe any changes to the list in user if its modified
         setTripsAsObservable(view)
-        currentTripsAdapter = TripListAdapter(userViewModel.getCurrentTrips())
+        currentTripsAdapter = TripListAdapter(userViewModel, userViewModel.getCurrentTrips())
 
         setupRecyclerView(view)
 

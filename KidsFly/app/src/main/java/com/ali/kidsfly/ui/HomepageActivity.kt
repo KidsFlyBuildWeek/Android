@@ -53,9 +53,4 @@ class HomepageActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         return NavigationUI.navigateUp(navController, drawer_layout)
     }
-
-    override fun onStop() {
-        //update the api regarding the user profile
-        super.onStop()
-    }
 }

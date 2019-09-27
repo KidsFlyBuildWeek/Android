@@ -78,7 +78,9 @@ class UserRepo(context: Context) {
     fun readAllCurrentTripsAsLiveData(user: UserProfile): MutableLiveData<MutableList<Trip>>{
         //add all the trips inside user profile to current trips
         (user as DownloadedUserProfile).trips.forEach {
-            currentTrips.add(it)
+            if(!currentTrips.contains(it)) {
+                currentTrips.add(it)
+            }
         }
         currentTripsLiveData.value = currentTrips
         return currentTripsLiveData
@@ -104,7 +106,7 @@ class UserRepo(context: Context) {
         database.tripDao().createSavedTripEntry(trip)
     }
 
-    fun getAllSavedTrips(trip: Trip): LiveData<MutableList<Trip>>{
+    fun getAllSavedTrips(): LiveData<MutableList<Trip>>{
         return database.tripDao().getAllSavedTrips()
     }
 

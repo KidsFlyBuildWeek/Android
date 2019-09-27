@@ -57,7 +57,7 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
         userRepo.createSavedTripEntry(trip)
     }
 
-    fun getAllSavedTrips(trip: Trip): LiveData<MutableList<Trip>> {
-        return userRepo.getAllSavedTrips(trip)
+    fun getAllSavedTrips(): LiveData<MutableList<Trip>> {
+        return userRepo.getAllSavedTrips()
     }
 }
