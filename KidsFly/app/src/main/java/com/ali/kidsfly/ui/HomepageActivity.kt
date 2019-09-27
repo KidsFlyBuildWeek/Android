@@ -3,21 +3,14 @@ package com.ali.kidsfly.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.ali.kidsfly.R
-import com.ali.kidsfly.adapter.TripListAdapter
 import com.ali.kidsfly.model.DownloadedUserProfile
-import com.ali.kidsfly.model.Trip
-import com.ali.kidsfly.model.UserProfile
 import com.ali.kidsfly.viewmodel.UserViewModel
 import kotlinx.android.synthetic.main.activity_homepage.*
-import kotlinx.android.synthetic.main.fragment_current_trips.*
 
 class HomepageActivity : AppCompatActivity() {
 
@@ -25,7 +18,7 @@ class HomepageActivity : AppCompatActivity() {
     lateinit var userViewModel: UserViewModel
 
     companion object {
-        lateinit var user: UserProfile //this is the current user profile
+        lateinit var user: DownloadedUserProfile //this is the current user profile
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,7 +27,7 @@ class HomepageActivity : AppCompatActivity() {
         setSupportActionBar(findViewById(R.id.top_toolbar))
 
         userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
-        user = intent.getSerializableExtra("User")!! as UserProfile
+        user = intent.getSerializableExtra("User")!! as DownloadedUserProfile
 
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)
 

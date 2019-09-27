@@ -1,9 +1,6 @@
 package com.ali.kidsfly.fragment
 
 
-import android.content.Context
-import android.opengl.Visibility
-import android.os.AsyncTask
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,13 +10,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.ali.kidsfly.R
 import com.ali.kidsfly.model.DownloadedUserProfile
-import com.ali.kidsfly.model.Trip
 import com.ali.kidsfly.model.TripToPost
 import com.ali.kidsfly.ui.HomepageActivity
 import com.ali.kidsfly.viewmodel.UserViewModel
-import kotlinx.android.synthetic.main.fragment_add_trip.*
-import java.lang.ref.WeakReference
-import java.util.*
 
 
 class AddTripFragment : Fragment() {
@@ -57,7 +50,7 @@ class AddTripFragment : Fragment() {
             val luggage = secondView.findViewById<EditText>(R.id.et_luggage).text.toString()
 
             if(airportText != "" && dateText != "" && numPassengersText != "" && numChildrenText != ""){
-                val trip = TripToPost(dateText, airportText, numPassengersText.toInt(), numChildrenText.toInt(), luggage, HomepageActivity.user as DownloadedUserProfile)
+                val trip = TripToPost(dateText, airportText, numPassengersText.toInt(), numChildrenText.toInt(), luggage, HomepageActivity.user)
                 userViewModel.addTripsToCurrentTrips(trip)
                 userViewModel.postTripToApi(trip)
 

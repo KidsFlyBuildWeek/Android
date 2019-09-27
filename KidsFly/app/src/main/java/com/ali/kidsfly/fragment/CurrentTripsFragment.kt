@@ -9,7 +9,6 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ali.kidsfly.R
@@ -18,7 +17,6 @@ import com.ali.kidsfly.model.Trip
 import com.ali.kidsfly.ui.HomepageActivity
 import com.ali.kidsfly.viewmodel.UserViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import kotlinx.android.synthetic.main.fragment_current_trips.*
 
 class CurrentTrips : Fragment() {
 
@@ -31,7 +29,7 @@ class CurrentTrips : Fragment() {
 
         userViewModel = ViewModelProvider(requireActivity()).get(UserViewModel::class.java) //gets the view model from the attached activity
         //will be able to observe any changes to the list in user if its modified
-        setTripsAsObservable()
+        setTripsAsObservable(view)
         currentTripsAdapter = TripListAdapter(userViewModel.getCurrentTrips())
 
         setupRecyclerView(view)
@@ -42,12 +40,13 @@ class CurrentTrips : Fragment() {
             //create the trip by opening up a pop-up fragment, and if trip is created, add it to recyclerview
             val fManager = activity!!.supportFragmentManager.beginTransaction()
             fManager.replace(R.id.container_for_add_trips, AddTripFragment())
+            fManager.addToBackStack(null)
             fManager.commit()
         }
         return view
     }
 
-    private fun setTripsAsObservable() {
+    private fun setTripsAsObservable(view: View) {
         userViewModel.getCurrentUserTripsAsLiveData(HomepageActivity.user).observe(this,
             object: Observer<MutableList<Trip>> {
                 override fun onChanged(t: MutableList<Trip>?) {

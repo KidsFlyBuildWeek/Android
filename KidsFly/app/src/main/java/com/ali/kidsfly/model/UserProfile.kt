@@ -13,11 +13,9 @@ class DownloadedUserProfile(username: String, password: String, phone: String, e
                             airport: String, val trips: MutableList<Trip>, val parentid: Int, val status: String)
                             : UserProfile(username, password, phone, email, name, address, airport), Serializable
 
-
-
 @Entity
 open class Trip(val date: String, val airport: String, val passengercount: Int, val childcount: Int,
-           val luggagetype: String, val isCurrentTrip: Boolean = true){
+           val luggagetype: String): Serializable{
 
     @PrimaryKey(autoGenerate = true) //this is so unintuitive
     var tripid: Int = 0
@@ -25,11 +23,5 @@ open class Trip(val date: String, val airport: String, val passengercount: Int, 
 
 //this is the trip that I will be posting
 class TripToPost(date: String, airport: String, passengercount: Int, childcount: Int,
-                 luggagetype: String, parentuser: DownloadedUserProfile)
-                : Trip(date, airport, passengercount, childcount, luggagetype)
-
-//
-//////this is the trip that we will receive when we download a new user profile
-//class TripWithId(date: String, airport: String, passengercount: Int, childcount: Int,
-//                 luggagetype: String, isCurrentTrip: Boolean = true)
-//                : Trip(date, airport, passengercount, childcount, luggagetype, isCurrentTrip)
+                 luggagetype: String, val parentuser: DownloadedUserProfile)
+                : Trip(date, airport, passengercount, childcount, luggagetype), Serializable

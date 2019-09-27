@@ -83,7 +83,14 @@ class UserRepo() {
     }
 
     fun postTripToApi(trip: TripToPost){
-        PostTripApiAsyncTask().execute(trip)
+        TripApi.getTripApiCall().postTrip(trip).enqueue(object: Callback<Unit>{
+            override fun onFailure(call: Call<Unit>, t: Throwable) {
+                throw t
+            }
+
+            override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
+            }
+        })
     }
 
     /*
@@ -132,14 +139,6 @@ class UserRepo() {
                 })
             }
         }
-
-        class PostTripApiAsyncTask() : AsyncTask<TripToPost, Void, Call<Unit>>() {
-
-            override fun doInBackground(vararg trip: TripToPost?): Call<Unit> {
-                return TripApi.getTripApiCall().postTrip(trip[0]!!)
-            }
-        }
-
     }
 
     class UpdateUserProfileApiService: Service(){
