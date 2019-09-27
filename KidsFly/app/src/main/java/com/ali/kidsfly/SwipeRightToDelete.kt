@@ -2,6 +2,7 @@ package com.ali.kidsfly
 
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.ali.kidsfly.adapter.TripListAdapter
 
 class SwipeRightToDelete(private val adapter: TripListAdapter): ItemTouchHelper.SimpleCallback(ItemTouchHelper.RIGHT, ItemTouchHelper.RIGHT) {
 

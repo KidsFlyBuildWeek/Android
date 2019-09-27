@@ -6,7 +6,7 @@
     android:padding="15dp">
 
     <TextView
-        android:id="@+id/tv_airport_name"
+        android:id="@+id/tv_airport_name_view"
         android:text="Dummy text"
         android:textSize="24sp"
         android:textColor="#fff"
@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"/>
 
     <TextView
-        android:id="@+id/tv_date"
+        android:id="@+id/tv_date_view"
         android:text="13/12/2019"
         android:textSize="18sp"
         android:layout_width="wrap_content"
@@ -23,7 +23,7 @@
         android:paddingStart="150dp"
         android:textColor="#fff"
         android:layout_marginTop="5dp"
-        android:layout_toRightOf="@id/tv_airport_name"/>
+        android:layout_toRightOf="@id/tv_airport_name_view"/>
 
     <Button
         android:id="@+id/btn_alert"
@@ -32,31 +32,31 @@
         android:background="#f00"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_airport_name"
+        android:layout_below="@id/tv_airport_name_view"
         android:layout_marginStart="12dp"
         android:padding="5dp"
         android:layout_marginTop="20dp"/>
     
     <TextView
-        android:id="@+id/tv_num_passengers"
+        android:id="@+id/tv_num_passengers_view"
         android:textSize="20sp"
         android:text="# of Passengers: 5"
         android:textColor="#fff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_airport_name"
+        android:layout_below="@id/tv_airport_name_view"
         android:layout_toRightOf="@id/btn_alert"
         android:layout_marginStart="55dp"
         android:paddingTop="10dp"/>
 
     <TextView
-        android:id="@+id/tv_num_children"
+        android:id="@+id/tv_num_children_view"
         android:textSize="20sp"
         android:text="# of Children: 1"
         android:textColor="#fff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_num_passengers"
+        android:layout_below="@id/tv_num_passengers_view"
         android:layout_toRightOf="@id/btn_alert"
         android:layout_marginStart="55dp"
         android:paddingTop="10dp"/>

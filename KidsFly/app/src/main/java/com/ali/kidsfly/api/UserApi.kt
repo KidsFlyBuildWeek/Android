@@ -1,4 +1,4 @@
-package com.ali.kidsfly
+package com.ali.kidsfly.api
 
 import com.ali.kidsfly.model.DownloadedUserProfile
 import com.ali.kidsfly.model.UserProfile
@@ -11,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
 import java.util.concurrent.TimeUnit
 
-interface TripApi {
+interface UserApi {
 
     @POST("parents/new")
     fun postUserProfile(@Body user: UserProfile) : Call<Unit>
@@ -19,11 +19,14 @@ interface TripApi {
     @GET("parents/{parentid}")
     fun getUserProfileInformation(@Path("parentid") parentid: Int): Call<DownloadedUserProfile>
 
+    @DELETE
+    fun deleteUserProfile(user: UserProfile) //permanently deletes user profile
+
     companion object{
 
         private const val BASE_URL = "https://kidsflybackend.herokuapp.com/"
 
-        fun getTripApiCall(): TripApi{
+        fun getUserApiCall(): UserApi {
             val logger = HttpLoggingInterceptor()
             logger.level = HttpLoggingInterceptor.Level.BASIC
             logger.level = HttpLoggingInterceptor.Level.BODY
@@ -45,7 +48,7 @@ interface TripApi {
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build()
 
-            return retrofit.create(TripApi::class.java)
+            return retrofit.create(UserApi::class.java)
         }
     }
 }

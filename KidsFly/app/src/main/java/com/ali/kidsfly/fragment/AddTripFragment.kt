@@ -11,8 +11,8 @@ import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.ali.kidsfly.R
-import com.ali.kidsfly.TripViewModel
 import com.ali.kidsfly.model.Trip
+import com.ali.kidsfly.viewmodel.UserViewModel
 import kotlinx.android.synthetic.main.fragment_add_trip.*
 import java.lang.ref.WeakReference
 import java.util.*
@@ -21,12 +21,12 @@ import java.util.*
 class AddTripFragment : Fragment() {
 
     private var tripSize = 0 //change upon loading in data from endpoint
-    private lateinit var tripViewModel: TripViewModel
+    private lateinit var tripViewModel: UserViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_add_trip, container, false)
-        tripViewModel = ViewModelProvider(requireActivity()).get(TripViewModel::class.java) //gets the view model from the attached activity
+        tripViewModel = ViewModelProvider(requireActivity()).get(UserViewModel::class.java) //gets the view model from the attached activity
 
         val edit_date = view.findViewById<EditText>(R.id.edit_date)
         val edit_airport = view.findViewById<EditText>(R.id.et_airport)
@@ -77,13 +77,13 @@ class AddTripFragment : Fragment() {
         return calendarView
     }
 
-    class CreateAsyncTask(viewModel: TripViewModel): AsyncTask<Trip, Void, Unit>(){
+    class CreateAsyncTask(viewModel: UserViewModel): AsyncTask<Trip, Void, Unit>(){
         private val viewModel = WeakReference(viewModel)
 
         override fun doInBackground(vararg trip: Trip?) {
             if(trip.isNotEmpty()){
                 trip[0]?.let{
-                    viewModel.get()?.createTripEntry(it)
+                    //viewModel.get()?
                     CurrentTrips.tripSize += 1
                 }
             }

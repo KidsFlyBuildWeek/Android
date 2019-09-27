@@ -1,31 +1,24 @@
 package com.ali.kidsfly.fragment
 
 
-import android.app.Activity
 import android.content.Context
-import android.os.AsyncTask
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ali.kidsfly.R
 import com.ali.kidsfly.SwipeRightToDelete
-import com.ali.kidsfly.TripListAdapter
-import com.ali.kidsfly.TripViewModel
+import com.ali.kidsfly.adapter.TripListAdapter
 import com.ali.kidsfly.model.Trip
-import com.ali.kidsfly.ui.HomepageActivity
+import com.ali.kidsfly.viewmodel.UserViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import kotlinx.android.synthetic.main.floating_action_bar.view.*
 import kotlinx.android.synthetic.main.fragment_current_trips.*
-import java.lang.ref.WeakReference
 
 class CurrentTrips : Fragment() {
 
@@ -33,14 +26,14 @@ class CurrentTrips : Fragment() {
         var tripSize = 0 //change upon loading in data from endpoint
     }
     private lateinit var tripListAdapter: TripListAdapter
-    private lateinit var tripViewModel: TripViewModel
+    private lateinit var userViewModel: UserViewModel
     private lateinit var swipeRightToDelete: SwipeRightToDelete
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_current_trips, container, false)
 
-        tripViewModel = ViewModelProvider(requireActivity()).get(TripViewModel::class.java) //gets the view model from the attached activity
+        userViewModel = ViewModelProvider(requireActivity()).get(UserViewModel::class.java) //gets the view model from the attached activity
         tripListAdapter = TripListAdapter(mutableListOf()) //replace with current trips
         swipeRightToDelete = SwipeRightToDelete(tripListAdapter)
 

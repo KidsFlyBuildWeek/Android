@@ -2,28 +2,26 @@ package com.ali.kidsfly.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import android.widget.TextView
-import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import com.ali.kidsfly.R
-import com.ali.kidsfly.TripViewModel
+import com.ali.kidsfly.model.DownloadedUserProfile
+import com.ali.kidsfly.model.Trip
 import com.ali.kidsfly.model.UserProfile
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationView
+import com.ali.kidsfly.viewmodel.UserViewModel
 import kotlinx.android.synthetic.main.activity_homepage.*
 
 class HomepageActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
-    lateinit var tripViewModel: TripViewModel
+    lateinit var userViewModel: UserViewModel
 
     companion object {
-        lateinit var user: UserProfile
+        lateinit var user: UserProfile //this is the current
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,7 +32,14 @@ class HomepageActivity : AppCompatActivity() {
 
         user = intent.getSerializableExtra("User")!! as UserProfile
 
-        tripViewModel = ViewModelProvider(this).get(TripViewModel::class.java)
+        userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
+
+        setTripsAsObservable()
+
+        //writes all of the trips to a database. if on pause is triggered then we will update the api
+//        (user as DownloadedUserProfile).trips.forEach{
+//            userViewModel.createTripEntry(it)
+//        }
 
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)
 
@@ -43,6 +48,15 @@ class HomepageActivity : AppCompatActivity() {
         setupActionBar()
 
         side_navigation.getHeaderView(0).findViewById<TextView>(R.id.tv_user).text = "${user.username}\n\n${user.name}"
+    }
+
+    private fun setTripsAsObservable() {
+        userViewModel.getCurrentUserTripsAsLiveData(user).observe(this,
+            object: Observer<MutableList<Trip>>{
+                override fun onChanged(t: MutableList<Trip>?) {
+
+                }
+            })
     }
 
     private fun setupBottomNavigation(){
